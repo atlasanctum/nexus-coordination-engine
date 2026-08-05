@@ -58,37 +58,43 @@ export function Gauge({
   const c = 2 * Math.PI * r;
   return (
     <div className="flex flex-col items-center gap-1">
-      <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`} className="-rotate-90">
-        <circle
-          cx={size / 2}
-          cy={size / 2}
-          r={r}
-          fill="none"
-          strokeWidth={5}
-          stroke="color-mix(in oklab, var(--foreground) 10%, transparent)"
-        />
-        <circle
-          cx={size / 2}
-          cy={size / 2}
-          r={r}
-          fill="none"
-          strokeWidth={5}
-          strokeLinecap="round"
-          stroke={hueVar[hue]}
-          strokeDasharray={c}
-          strokeDashoffset={c * (1 - value / 100)}
-          style={{ filter: `drop-shadow(0 0 6px ${hueVar[hue]})`, transition: "stroke-dashoffset 1.2s ease" }}
-        />
-      </svg>
-      <div className="-mt-[calc(50%+0.4rem)] mb-[calc(50%-1.1rem)] text-center">
-        <div className="num text-base leading-none" style={{ color: hueVar[hue] }}>
+      <div className="relative" style={{ width: size, height: size }}>
+        <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
+          <g transform={`rotate(-90 ${size / 2} ${size / 2})`}>
+            <circle
+              cx={size / 2}
+              cy={size / 2}
+              r={r}
+              fill="none"
+              strokeWidth={5}
+              stroke="color-mix(in oklab, var(--foreground) 10%, transparent)"
+            />
+            <circle
+              cx={size / 2}
+              cy={size / 2}
+              r={r}
+              fill="none"
+              strokeWidth={5}
+              strokeLinecap="round"
+              stroke={hueVar[hue]}
+              strokeDasharray={c}
+              strokeDashoffset={c * (1 - value / 100)}
+              style={{ filter: `drop-shadow(0 0 6px ${hueVar[hue]})`, transition: "stroke-dashoffset 1.2s ease" }}
+            />
+          </g>
+        </svg>
+        <span
+          className="num absolute inset-0 flex items-center justify-center text-sm"
+          style={{ color: hueVar[hue] }}
+        >
           {value}
-        </div>
+        </span>
       </div>
       {label ? <span className="text-center text-[10px] leading-tight text-muted-foreground">{label}</span> : null}
     </div>
   );
 }
+
 
 function path(values: number[], w: number, h: number) {
   const max = Math.max(...values);
