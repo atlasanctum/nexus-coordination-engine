@@ -33,9 +33,9 @@ function buildNodes(): Node[] {
     const k = kinds[Math.floor(rnd() * kinds.length)]!;
     out.push({
       id: i,
-      x: 340 + Math.cos(a) * rad * 1.28,
-      y: 240 + Math.sin(a) * rad * 0.82,
-      r: 1.6 + rnd() * 3.6,
+      x: Math.round((340 + Math.cos(a) * rad * 1.28) * 100) / 100,
+      y: Math.round((240 + Math.sin(a) * rad * 0.82) * 100) / 100,
+      r: Math.round((1.6 + rnd() * 3.6) * 100) / 100,
       hue: k.hue,
       kind: k.kind,
       name: names[i % names.length]!,
