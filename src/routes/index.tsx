@@ -1,24 +1,83 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Sidebar } from "@/components/oen/Sidebar";
+import { TopBar } from "@/components/oen/TopBar";
+import { NetworkGraph } from "@/components/oen/NetworkGraph";
+import { WorldMap } from "@/components/oen/WorldMap";
+import {
+  KpiRow,
+  OrgProfile,
+  PartnershipEngine,
+  Analytics,
+  MoralPanel,
+  Discovery,
+  ActivityFeed,
+  CommandCenter,
+} from "@/components/oen/panels";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "Organizations · Opportunity Exchange Network" },
+      {
+        name: "description",
+        content:
+          "Coordinate organizations and accelerate global impact: live network graph, AI partnership engine, trust analytics and mission control for 15,248 organizations.",
+      },
+      { property: "og:title", content: "Organizations · Opportunity Exchange Network" },
+      {
+        property: "og:description",
+        content:
+          "A civilization-scale operations console for governments, NGOs, universities, investors and enterprises.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: OrganizationsDashboard,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function OrganizationsDashboard() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <main className="min-h-screen p-3 lg:p-4">
+      <TopBar />
+
+      <div className="mt-3 flex flex-col gap-3 xl:flex-row">
+        <div className="xl:sticky xl:top-4 xl:h-[calc(100vh-2rem)] xl:w-60 xl:shrink-0">
+          <Sidebar />
+        </div>
+
+        <div className="flex min-w-0 flex-1 flex-col gap-3">
+          <KpiRow />
+
+          <div className="grid gap-3 xl:grid-cols-[1.55fr_1fr]">
+            <NetworkGraph />
+            <OrgProfile />
+          </div>
+
+          <div className="grid gap-3 xl:grid-cols-[1.55fr_1fr]">
+            <WorldMap />
+            <PartnershipEngine />
+          </div>
+
+          <Analytics />
+
+          <div className="grid gap-3 xl:grid-cols-3">
+            <MoralPanel />
+            <ActivityFeed />
+            <CommandCenter />
+          </div>
+
+          <Discovery />
+
+          <footer className="glass flex flex-wrap items-center justify-between gap-2 px-4 py-2.5">
+            <span className="mono-label">Opportunity Exchange Network</span>
+            <span className="text-[11px] tracking-[0.18em] text-muted-foreground uppercase">
+              Secure · Open · Interoperable · Scalable
+            </span>
+            <span className="mono-label">Organizations · Powered by Atlas AI</span>
+          </footer>
+        </div>
+      </div>
+    </main>
   );
 }
