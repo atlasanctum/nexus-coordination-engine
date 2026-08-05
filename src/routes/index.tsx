@@ -27,7 +27,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "A civilization-scale operations console for governments, NGOs, universities, investors and enterprises.",
+          "Coordinate organizations and accelerate global impact: live network graph, AI partnership engine, trust analytics and mission control for 15,248 organizations.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
